@@ -9,7 +9,7 @@ import Foundation
 
 let openAIRepository = OpenAIRepository()
 let keyManager = KeyManager()
-let test = Test()
+let test = TestWapper()
 
 let cachedToken = keyManager.receiveCachedToken()
 var openAIToken: String = ""
@@ -48,7 +48,7 @@ do {
 
 
 
-class Test {
+class TestWapper {
   @Sendable func runShellCommand(_ command: String, arguments: [String]) -> String {
     let process = Process()
     process.executableURL = URL(fileURLWithPath: command)
