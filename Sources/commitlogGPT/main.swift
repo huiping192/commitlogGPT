@@ -71,9 +71,7 @@ func escapeCommitMessage(_ message: String) -> String {
   return message.replacingOccurrences(of: "'", with: "\\'")
 }
 
-func promptUser(choices: [String]) -> String? {
-  print("[debug] \(choices)")
-  
+func promptUser(choices: [String]) -> String? {  
   for (index, choice) in choices.enumerated() {
     print("\(index + 1). \(choice)")
   }

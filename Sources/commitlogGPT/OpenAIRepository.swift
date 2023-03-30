@@ -33,8 +33,6 @@ class OpenAIRepository {
     """
     
     let response = try await openAI.sendCompletion(with: text)
-    print("[debug] \(response.choices)")
-
     return adjustResponse(text: response.choices.first?.text)
   }
   
@@ -45,8 +43,6 @@ class OpenAIRepository {
     """
     
     let response = try await openAI.sendCompletion(with: text)
-    print("[debug] \(response.choices)")
-
     return adjustResponse(text: response.choices.first?.text)
   }
   
