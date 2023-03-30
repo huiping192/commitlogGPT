@@ -1,5 +1,5 @@
 import XCTest
-@testable import commmitlogGPT
+//@testable import commmitlogGPT
 
 //final class commmitlogGPTTests: XCTestCase {
 //    func testExample() throws {
