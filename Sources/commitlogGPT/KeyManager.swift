@@ -34,4 +34,8 @@ class KeyManager {
     
     return nil
   }
+  
+  func removeToken() {
+    try? FileManager.default.removeItem(atPath: tokenFileURL().path)
+  }
 }

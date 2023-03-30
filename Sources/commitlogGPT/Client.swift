@@ -11,6 +11,10 @@ class Client {
   let openAIRepository = OpenAIRepository()
   let keyManager = KeyManager()
 
+  func clearSettings() {
+    keyManager.removeToken()
+  }
+  
   func run() async {
     let cachedToken = keyManager.receiveCachedToken()
     var openAIToken: String = ""

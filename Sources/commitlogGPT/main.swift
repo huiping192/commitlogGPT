@@ -1,19 +1,32 @@
-//
-//  File.swift
-//  
-//
-//  Created by 郭 輝平 on 2023/03/30.
-//
-
 import Foundation
 import ArgumentParser
 
 struct CLG: ParsableCommand {
+  static var configuration = CommandConfiguration(
+    commandName: "clg",
+    abstract: "Generates commit messages",
+    discussion: """
+          Generates commit messages using OpenAI's ChatGPT.
+          """,
+    version: "0.0.1",
+    shouldDisplay: true,
+    helpNames: [.long, .short]
+  )
   @Flag(name: .shortAndLong, help: "Enable debug mode.")
   var debug: Bool = false
   
+  @Flag(name: .long, help: "Clear settings.")
+  var clearSettings: Bool = false
+  
   mutating func run() async throws {
-    await Client().run()
+    let client = Client()
+
+    if clearSettings {
+      client.clearSettings()
+      print("Settings cleared.")
+      return
+    }
+    await client.run()
   }
 }
 
