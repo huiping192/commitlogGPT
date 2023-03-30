@@ -29,7 +29,7 @@ The tool will analyze your staged changes in your Git repository and generate co
 
 # example
 
-![example gif](https://github.com/huiping192/commitlogGPT/blob/main/example.gif)
+![example gif](https://github.com/huiping192/commitlogGPT/blob/main/sample.gif)
 
 
 # Contributing
