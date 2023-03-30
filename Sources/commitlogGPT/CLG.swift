@@ -13,20 +13,20 @@ struct CLG: AsyncParsableCommand {
     shouldDisplay: true,
     helpNames: [.long, .short]
   )
-//  @Flag(name: .shortAndLong, help: "Enable debug mode.")
-//  var debug: Bool = false
-//
-//  @Flag(name: .long, help: "Clear settings.")
-//  var clearSettings: Bool = false
+  @Flag(name: .shortAndLong, help: "Enable debug mode.")
+  var debug: Bool = false
+  
+  @Flag(name: .long, help: "Clear settings.")
+  var clearSettings: Bool = false
   
   mutating func run() async throws {
     let client = Client()
-
-//    if clearSettings {
-//      client.clearSettings()
-//      print("Settings cleared.")
-//      return
-//    }
+    
+    if clearSettings {
+      client.clearSettings()
+      print("Settings cleared.")
+      return
+    }
     await client.run()
   }
 }
