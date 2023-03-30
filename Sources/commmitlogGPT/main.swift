@@ -40,7 +40,7 @@ if diff.isEmpty {
 do {
   print("Requesting commit logs...")
   let commitlogs = try await openAIRepository.receiveCommitlogs(by: diff)
-  confirmCommitLog(suggestCommitLogs: commitlogs)
+  await confirmCommitLog(suggestCommitLogs: commitlogs)
 } catch {
   print("Failed to get result from openapi. error: \(error.localizedDescription)")
 }
@@ -84,41 +84,41 @@ func promptUser(choices: [String]) -> String? {
   return nil
 }
 
-let CUSTOM_MESSAGE_OPTION = "Custom Message"
-let MORE_OPTION = "More Options"
 
+func confirmCommitLog(suggestCommitLogs: [String]) async {
+  let more = "More Options"
+  let quit = "Quit"
+  
+  var choices: [String] = suggestCommitLogs
+  choices.append(more)
+  choices.append(quit)
 
-func confirmCommitLog(suggestCommitLogs: [String]) {
-  let choices = suggestCommitLogs + [
-    CUSTOM_MESSAGE_OPTION,
-    MORE_OPTION
-  ]
-  
-  var firstRequestSent = false
-  
   while true {
-    do {
-      guard let answer = promptUser(choices: choices) else {
-        print("Invalid choice. Please try again.")
-        continue
-      }
-      
-      firstRequestSent = true
-      
-      if answer == CUSTOM_MESSAGE_OPTION {
-        let _ = runShellCommand("/usr/bin/git", arguments: ["commit"])
-        return
-      } else if answer == MORE_OPTION {
-        continue
-      } else {
-        let escapedMessage = escapeCommitMessage(answer)
-        let _ = runShellCommand("/usr/bin/git", arguments: ["commit", "-m", escapedMessage])
-        return
-      }
-    } catch {
-      print("Aborted.")
-      print(error.localizedDescription)
-      exit(1)
+    guard let answer = promptUser(choices: choices) else {
+      print("Invalid choice. Please try again.")
+      continue
     }
+        
+    if answer == more {
+      await getMore()
+      return
+    } else if answer == quit {
+      exit(0)
+    } else {
+      let escapedMessage = escapeCommitMessage(answer)
+      let _ = runShellCommand("/usr/bin/git", arguments: ["commit", "-m", escapedMessage])
+      return
+    }
+  }
+}
+
+
+func getMore() async {
+  do {
+    print("Requesting more commit logs...")
+    let commitlogs = try await openAIRepository.receiveCommitlogs(by: diff)
+    await confirmCommitLog(suggestCommitLogs: commitlogs)
+  } catch {
+    print("Failed to get result from openapi. error: \(error.localizedDescription)")
   }
 }

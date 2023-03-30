@@ -29,10 +29,24 @@ class OpenAIRepository {
     \(diff)
     \n
     ```\n\n
-    Output results as a list, not more than 6 items.
+    Output results as a list, spilt by \n, not more than 6 items.
     """
     
     let response = try await openAI.sendCompletion(with: text)
+    print("[debug] \(response.choices)")
+
+    return adjustResponse(text: response.choices.first?.text)
+  }
+  
+  func receiveMoreCommitlogs(by diff: String) async throws -> [String] {
+    let text =
+    """
+    Suggest a few more commit messages for my changes (without explanations)
+    """
+    
+    let response = try await openAI.sendCompletion(with: text)
+    print("[debug] \(response.choices)")
+
     return adjustResponse(text: response.choices.first?.text)
   }
   
