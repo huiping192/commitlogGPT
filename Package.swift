@@ -4,23 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "commmitlogGPT",
+    name: "commitlogGPT",
     platforms: [
         .macOS(.v10_15)
     ],
     products: [
-        .executable(name: "clg",
-                    targets: ["commmitlogGPT"])
+        .executable(name: "clg", targets: ["commitlogGPT"])
     ],
     dependencies: [
-      .package(url: "https://github.com/adamrushy/OpenAISwift.git", from: "1.0.0")
+        .package(url: "https://github.com/adamrushy/OpenAISwift.git", from: "1.0.0")
     ],
     targets: [
-      .target(name: "commmitlogGPT", dependencies: [
-        .product(name: "OpenAISwift", package: "OpenAISwift")
-      ]),
-      .testTarget(
-        name: "commmitlogGPTTests",
-        dependencies: ["commmitlogGPT"]),
+        .executableTarget(
+            name: "commitlogGPT",
+            dependencies: [
+                .product(name: "OpenAISwift", package: "OpenAISwift")
+            ]
+        ),
+        .testTarget(
+            name: "commitlogGPTTests",
+            dependencies: ["commitlogGPT"]),
     ]
 )
