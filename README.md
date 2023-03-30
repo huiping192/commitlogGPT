@@ -27,8 +27,12 @@ clg
 
 The tool will analyze your staged changes in your Git repository and generate commit messages using ChatGPT. You can select one of the suggested commit messages, or ask for more options.
 
+# example
 
-#Contributing
+![example gif](https://github.com/huiping192/commitlogGPT/blob/main/example.gif)
+
+
+# Contributing
 Contributions are welcome! Feel free to submit a pull request or create an issue for any suggestions or improvements.
 
 # License
