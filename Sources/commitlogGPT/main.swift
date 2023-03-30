@@ -6,5 +6,16 @@
 //
 
 import Foundation
+import ArgumentParser
 
-await Client().run()
+struct CLG: ParsableCommand {
+  @Flag(name: .shortAndLong, help: "Enable debug mode.")
+  var debug: Bool = false
+  
+  mutating func run() async throws {
+    await Client().run()
+  }
+}
+
+CLG.main()
+
