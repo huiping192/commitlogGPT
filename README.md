@@ -1,4 +1,4 @@
-#CommitlogGPT
+# CommitlogGPT
 CommitlogGPT is a command-line tool built with Swift that generates commit messages using OpenAI's ChatGPT. It is inspired by RomanHotsiy/commitgpt and aims to provide a simple way to create meaningful commit messages for your Git repositories.
 
 # Prerequisites
@@ -11,6 +11,8 @@ Clone this repository to your local machine:
 ```
 git clone https://github.com/huiping192/commitlogGPT.git
 cd commitlogGPT
+swift build -c release
+cp .build/release/clg /usr/local/bin/clg
 ```
 
 
@@ -19,8 +21,6 @@ cd commitlogGPT
 build and run the project:
 
 ```
-swift build -c release
-cp .build/release/clg /usr/local/bin/clg
 
 clg
 ```
