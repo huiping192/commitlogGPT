@@ -36,6 +36,14 @@ class KeyManager {
   }
   
   func removeToken() {
-    try? FileManager.default.removeItem(atPath: tokenFileURL().path)
+    let fileURL = tokenFileURL()
+    let fileManager = FileManager.default
+
+    if fileManager.fileExists(atPath: fileURL.path) {
+        try? fileManager.removeItem(at: fileURL)
+        print("Token file removed.")
+    } else {
+        print("Token file not found.")
+    }
   }
 }
