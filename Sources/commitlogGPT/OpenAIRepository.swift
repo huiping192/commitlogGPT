@@ -36,7 +36,7 @@ class OpenAIRepository {
     return adjustResponse(text: response.choices.first?.text)
   }
   
-  func receiveMoreCommitlogs(by diff: String) async throws -> [String] {
+  func receiveMoreCommitlogs() async throws -> [String] {
     let text =
     """
     Suggest a few more commit messages for my changes (without explanations)
